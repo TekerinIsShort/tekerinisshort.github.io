@@ -1,0 +1,31 @@
+#map{
+    position: relative;
+    text-align: center;
+}
+
+/* #map_main{
+    position: absolute;
+    margin: auto;
+    width: 50%;
+} */
+
+#map_main{
+    text-align: center;
+}
+
+#banner{
+    margin-bottom: 55px;
+    text-align: center;
+}
+
+.fort {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#B1 {
+    z-index: 50;
+    top: 440px;
+    left: 577px;
+}

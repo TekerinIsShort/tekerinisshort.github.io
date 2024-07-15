@@ -40,17 +40,38 @@ for(let i = 0; i < forts.length;i++){
 
 // Define the function 
 // to screenshot the div
-function takeshot() {
+//html2canvas version
+
+// function takeshot() {
+//     const map = document.getElementById('map');
+
+//     // Use the html2canvas
+//     // function to take a screenshot
+//     // and append it
+//     // to the output div
+//     html2canvas(map).then(
+//         function (canvas) {
+//             document.getElementById('output').appendChild(canvas);
+//         });
+// }
+
+// dom-to-image version
+function takeshot2(){
     const map = document.getElementById('map');
 
-    // Use the html2canvas
-    // function to take a screenshot
-    // and append it
-    // to the output div
-    html2canvas(map).then(
-        function (canvas) {
-            document.getElementById('output').appendChild(canvas);
-        });
+    // domtoimage.toPng(map)
+    //     .then(function (dataUrl) {
+    //         var img = new Image();
+    //         img.src = dataUrl;
+    //         document.getElementById('output').appendChild(img);
+    //     })
+    //     .catch(function (error) {
+    //         console.error('oops, something went wrong!', error);
+    //     });
+    domtoimage.toBlob(map)
+    .then(function (blob) {
+        window.saveAs(blob, 'Tekerinisshort.png');
+    });
 }
 
 

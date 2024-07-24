@@ -6,9 +6,20 @@ const map = document.getElementById('map');
 const forts = document.getElementsByClassName("fort");
 const mapMain = document.getElementById('map_main');
 
-mapMain.addEventListener('contextmenu',(event)=>{
-    event.preventDefault();
-});
+// mapMain.addEventListener('contextmenu',(event)=>{
+//     event.preventDefault();
+// });
+
+function removeRightClick(element){
+    element.addEventListener('contextmenu',(event)=>{
+        event.preventDefault();
+    });
+}
+
+for(let i = 0; i < forts.length;i++)
+    removeRightClick(forts[i]);
+
+removeRightClick(mapMain);
 
 // global variable
 let isPugMode = true;
@@ -17,7 +28,7 @@ let isPugMode = true;
 
 // make recognizers global
 let tap = new Hammer.Tap({event: "singletap", taps : 1});
-let press = new Hammer.Press({ time: 500 });
+let press = new Hammer.Press({ time: 250 });
 // requires press event to fail in order for tap event to execute
 tap.requireFailure(press);
 for(let i = 0; i < forts.length;i++){
@@ -26,7 +37,6 @@ for(let i = 0; i < forts.length;i++){
     manager.on('singletap',(e)=>{
         const id = e.target.id;
         const color = e.target.getAttribute("data-color");
-        console.log(e.target.src);
         if(id != "S1"){
             if(color == "default"){
                 e.target.setAttribute("data-color","red");
@@ -163,6 +173,7 @@ function pressDownCrown(){
                 img.style.zIndex = 51;
                 img.id = id + "_crown";
                 img.classList.add("fort");
+                removeRightClick(img);
                 map.appendChild(img);
             }
         });
@@ -187,6 +198,8 @@ function pressDownCrown(){
     // e.target.classList.toggle('expand');
     // });
 }
+
+
 
 // function cancel() {
 //     clearTimeout(timer);
@@ -260,24 +273,13 @@ pressDownCrown();
 // dom-to-image version
 function takeshot2(){
     const map = document.getElementById('map');
-
-    // domtoimage.toPng(map)
-    //     .then(function (dataUrl) {
-    //         var img = new Image();
-    //         img.src = dataUrl;
-    //         document.getElementById('output').appendChild(img);
-    //     })
-    //     .catch(function (error) {
-    //         console.error('oops, something went wrong!', error);
-    //     });
     domtoimage.toBlob(map)
-    .then(function (blob) {
+        .then(function (blob) {
         window.saveAs(blob, 'Tekerinisshort.png');
     });
 }
 
 
-console.log(html2canvas);
 
 
 

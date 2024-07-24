@@ -10,6 +10,11 @@
     width: 1486px;
 } 
 
+#map_main > img{
+    -webkit-touch-callout: none !important;
+    /* -webkit-user-select: none !important;  */
+}
+
 #edit_btns{
     text-align: center;
 }

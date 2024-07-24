@@ -10,14 +10,6 @@
     width: 1486px;
 } 
 
-#edit_btns > img{
-    width: 15%;
-}
-
-#edit_btns > a img{
-    width: 14%;
-}
-
 #map_main > img{
     -webkit-touch-callout: none !important;
     /* -webkit-user-select: none !important;  */

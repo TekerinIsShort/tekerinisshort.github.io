@@ -14,61 +14,64 @@ mapMain.addEventListener('contextmenu',(event)=>{
 let isPugMode = true;
 
 
-function toggleFortColor(){
-    const color = this.getAttribute("data-color");
-    console.log('ID of fort clicked is ' + this.id);
-    // handle all bases that are not S1
-    if(this.id != "S1"){
-        console.log('inside not S1 conditional');
-        if(color == "default"){
-            this.setAttribute("data-color","red");
-            this.src = "./red/" + this.id + ".png";
-        }
-        else if(color == "red"){
-            this.setAttribute("data-color","blue");
-            this.src = "./blue/" + this.id + ".png";
-        }
-        else{
-            this.setAttribute("data-color","default");
-            this.src = "./default/" + this.id + ".png";
-        }
-    }
-    else{
-        if(isPugMode){
-            console.log("is pug running");
-            if(color == "default"){
-                this.setAttribute("data-color","red");
-                this.src = "./red/pug/S1_Pug.png";
-            }
-            else if(color == "red"){
-                this.setAttribute("data-color","blue");
-                this.src = "./blue/pug/S1_Pug.png";
-            }
-            else{
-                this.setAttribute("data-color","default");
-                this.src = "./default/pug/S1_Pug.png";
-            }
-        }
-        else{
-            if(color == "default"){
-                this.setAttribute("data-color","red");
-                this.src = "./red/" + this.id + ".png";
-            }
-            else if(color == "red"){
-                this.setAttribute("data-color","blue");
-                this.src = "./blue/" + this.id + ".png";
-            }
-            else{
-                this.setAttribute("data-color","default");
-                this.src = "./default/" + this.id + ".png";
-            }
-        }
-    }
-}
 
-
+// make recognizers global
+let tap = new Hammer.Tap({event: "singletap", taps : 1});
+let press = new Hammer.Press({ time: 500 });
+// requires press event to fail in order for tap event to execute
+tap.requireFailure(press);
 for(let i = 0; i < forts.length;i++){
-    forts[i].addEventListener('click',toggleFortColor,false);
+    let manager = new Hammer.Manager(forts[i]);
+    manager.add(tap);
+    manager.on('singletap',(e)=>{
+        const id = e.target.id;
+        const color = e.target.getAttribute("data-color");
+        console.log(e.target.src);
+        if(id != "S1"){
+            if(color == "default"){
+                e.target.setAttribute("data-color","red");
+                e.target.src = "./red/" + id + ".png";
+            }
+            else if(color == "red"){
+                e.target.setAttribute("data-color","blue");
+                e.target.src = "./blue/" + id + ".png";
+            }
+            else{
+                e.target.setAttribute("data-color","default");
+                e.target.src = "./default/" + id + ".png";
+            }
+        }
+        else{
+            if(isPugMode){
+                if(color == "default"){
+                    e.target.setAttribute("data-color","red");
+                    e.target.src = "./red/pug/S1_Pug.png";
+                }
+                else if(color == "red"){
+                    e.target.setAttribute("data-color","blue");
+                    e.target.src = "./blue/pug/S1_Pug.png";
+                }
+                else{
+                    e.target.setAttribute("data-color","default");
+                    e.target.src = "./default/pug/S1_Pug.png";
+                }
+            }
+            else{
+                if(color == "default"){
+                    e.target.setAttribute("data-color","red");
+                    e.target.src = "./red/" + id + ".png";
+                }
+                else if(color == "red"){
+                    e.target.setAttribute("data-color","blue");
+                    e.target.src = "./blue/" + id + ".png";
+                }
+                else{
+                    e.target.setAttribute("data-color","default");
+                    e.target.src = "./default/" + id + ".png";
+                }
+            }
+        }
+    });
 }
 
 
@@ -133,9 +136,9 @@ function editModeHandler(){
 // press down for mobile support
 function pressDownCrown(){
     // recognizer for hammerjs
-    let press = new Hammer.Press({
-        time: 500
-    });
+    // let press = new Hammer.Press({
+    //     time: 500
+    // });
     for(let i = 0; i < forts.length;i++){
         let manager = new Hammer.Manager(forts[i]);
         manager.add(press);
@@ -275,3 +278,68 @@ function takeshot2(){
 
 
 console.log(html2canvas);
+
+
+
+
+
+
+
+
+// original onclick event written
+// function toggleFortColor(){
+//     const color = this.getAttribute("data-color");
+//     console.log('ID of fort clicked is ' + this.id);
+//     // handle all bases that are not S1
+//     if(this.id != "S1"){
+//         console.log('inside not S1 conditional');
+//         if(color == "default"){
+//             this.setAttribute("data-color","red");
+//             this.src = "./red/" + this.id + ".png";
+//         }
+//         else if(color == "red"){
+//             this.setAttribute("data-color","blue");
+//             this.src = "./blue/" + this.id + ".png";
+//         }
+//         else{
+//             this.setAttribute("data-color","default");
+//             this.src = "./default/" + this.id + ".png";
+//         }
+//     }
+//     else{
+//         if(isPugMode){
+//             console.log("is pug running");
+//             if(color == "default"){
+//                 this.setAttribute("data-color","red");
+//                 this.src = "./red/pug/S1_Pug.png";
+//             }
+//             else if(color == "red"){
+//                 this.setAttribute("data-color","blue");
+//                 this.src = "./blue/pug/S1_Pug.png";
+//             }
+//             else{
+//                 this.setAttribute("data-color","default");
+//                 this.src = "./default/pug/S1_Pug.png";
+//             }
+//         }
+//         else{
+//             if(color == "default"){
+//                 this.setAttribute("data-color","red");
+//                 this.src = "./red/" + this.id + ".png";
+//             }
+//             else if(color == "red"){
+//                 this.setAttribute("data-color","blue");
+//                 this.src = "./blue/" + this.id + ".png";
+//             }
+//             else{
+//                 this.setAttribute("data-color","default");
+//                 this.src = "./default/" + this.id + ".png";
+//             }
+//         }
+//     }
+// }
+
+// for(let i = 0; i < forts.length;i++){
+//     forts[i].addEventListener('click',toggleFortColor,false);
+// }
+

@@ -4,6 +4,11 @@
 // get all forts within map
 const map = document.getElementById('map');
 const forts = document.getElementsByClassName("fort");
+const mapMain = document.getElementById('map_main');
+
+mapMain.addEventListener('contextmenu',(event)=>{
+    event.preventDefault();
+});
 
 // global variable
 let isPugMode = true;
@@ -94,10 +99,47 @@ function editModeHandler(){
     });
 }
 
-function desktopCrownHandler(){
+// function desktopCrownHandler(){
+//     for(let i = 0; i < forts.length;i++){
+//         forts[i].addEventListener('contextmenu',(event)=>{
+//             event.preventDefault(); 
+//             const id = event.target.id;
+//             if(id == "S1" || id == "BaseBL" || id == "BaseTL" || id == "BaseBR" || id == "BaseTR")
+//                 return;
+//             // if crown exist delete crown
+//             const isCrownExist = document.getElementById(id + "_crown");
+//             if(isCrownExist)
+//                 isCrownExist.remove();
+//             else{
+//                 // Get Top And Left Property Values Of Javascript Element
+//                 const top = parseInt(window.getComputedStyle(event.target)["top"]);
+//                 const left = parseInt(window.getComputedStyle(event.target)["left"]);
+//                 // Create Img tag for crown and position on Top Of Fort
+//                 const img = document.createElement('img');
+//                 img.src = "crown_small.png";
+//                 img.style.zIndex = 2;
+//                 img.style.top = (top - 25) + "px";
+//                 img.style.left = (left + 11) + "px";
+//                 img.style.zIndex = 51;
+//                 img.id = id + "_crown";
+//                 img.classList.add("fort");
+//                 map.appendChild(img);
+//             }
+//         });
+//     }
+// }
+
+
+// press down for mobile support
+function pressDownCrown(){
+    // recognizer for hammerjs
+    let press = new Hammer.Press({
+        time: 500
+    });
     for(let i = 0; i < forts.length;i++){
-        forts[i].addEventListener('contextmenu',(event)=>{
-            event.preventDefault(); 
+        let manager = new Hammer.Manager(forts[i]);
+        manager.add(press);
+        manager.on('press',(event)=>{
             const id = event.target.id;
             if(id == "S1" || id == "BaseBL" || id == "BaseTL" || id == "BaseBR" || id == "BaseTR")
                 return;
@@ -122,28 +164,47 @@ function desktopCrownHandler(){
             }
         });
     }
+    
+    // // Get a reference to an element
+    // var square = document.querySelector('.square');
+
+    // // Create a manager to manager the element
+    // var manager = new Hammer.Manager(square);
+
+    // // Create a recognizer
+    // var Press = new Hammer.Press({
+    // time: 500
+    // });
+
+    // // Add the recognizer to the manager
+    // manager.add(Press);
+
+    // // Subscribe to desired event
+    // manager.on('press', function(e) {
+    // e.target.classList.toggle('expand');
+    // });
 }
 
-function cancel() {
-    clearTimeout(timer);
-  }
+// function cancel() {
+//     clearTimeout(timer);
+//   }
 
-function mobileCrownHandler(){
-    let timer;
-    for(let i = 0; i < i < forts.length;i++){
-        forts[i].addEventListener('touchstart',()=>{
-            timer = setTimeout(() => {
-                timer = null;
-                console.log('touched for 2 seconds');
-                // do stuff
-                
-            }, 2000);
-        });
+// function mobileCrownHandler(){
+//     let timer;
+//     for(let i = 0; i < i < forts.length;i++){
+//         forts[i].addEventListener('touchstart',()=>{
+//             timer = setTimeout(() => {
+//                 timer = null;
+//                 console.log('touched for 2 seconds');
+//                 // do stuff
 
-        forts[i].addEventListener('touchend',cancel);
-        forts[i].addEventListener('touchmove',cancel);
-    }
-}
+//             }, 2000);
+//         });
+
+//         forts[i].addEventListener('touchend',cancel);
+//         forts[i].addEventListener('touchmove',cancel);
+//     }
+// }
 
 // function onLongPress(element, callback) {
 //     let timer;
@@ -162,7 +223,8 @@ function mobileCrownHandler(){
 //   }
 
 editModeHandler();
-desktopCrownHandler();
+pressDownCrown();
+// desktopCrownHandler();
 
 
 

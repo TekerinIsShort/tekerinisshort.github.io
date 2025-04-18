@@ -1,3 +1,9 @@
+html, body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box; /* Ensure consistent box model */
+}
+
 body {
   display: flex;
   justify-content: center;

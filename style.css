@@ -1,0 +1,96 @@
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; 
+  margin: 0; 
+}
+
+#map_container {
+  width: 80%; 
+  height: auto; 
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Leave it at 80 percent or else the map too big */
+#map {
+  width: 65%; 
+  height: auto; 
+  z-index: 1;
+}
+
+.hexagons {
+    position: absolute;
+    width: 3.8%; /* Adjust as needed for responsiveness */
+    height: auto; 
+    z-index: 3;
+  }
+
+.base {
+  position: absolute;
+  width: 5%; /* Adjust as needed for responsiveness */
+  /* height: auto; Maintain aspect ratio */
+  z-index: 3;
+}
+
+#download_button_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:1%;
+  width: 100%; /* Full width to center the button */
+}
+
+#download_button {
+  width: 15%; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+#gif_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#tekerinis_gif {
+  width: 80%; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+#nav_links {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between links */
+  margin-top: 10px; /* Add spacing between the GIF and the links */
+  margin-bottom: 20px; /* Add spacing between the links and the map container */
+}
+
+.nav_link {
+  text-decoration: none; /* Remove default underline */
+  color: black; /* Default link color */
+  font-size: 1.6em; /* Adjust font size as needed */
+  font-weight: bold; /* Make the links bold */
+}
+
+.nav_link.active {
+  text-decoration: underline; /* Underline the active link */
+}
+
+.nav_link:visited {
+  text-decoration: none;
+}
+
+#women {
+  position: absolute;
+  bottom: 0; /* Position it at the bottom of the map */
+  width: 65%; 
+  height: auto; 
+  z-index: 2; 
+}

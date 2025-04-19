@@ -53,7 +53,7 @@ fortsBaseArray.forEach(element => {
 // Once page loads, set random image of women at the bottom of the map
 document.addEventListener('DOMContentLoaded', () => {
     const womenImage = document.getElementById('women');
-    const images = ['images/women/women1.png', 'images/women/women2.png']; // Array of image paths
+    const images = ['images/women/women1.png', 'images/women/women2.png','images/women/women3.png']; // Array of image paths
   
     // Select a random image
     let randomIndex = Math.floor(Math.random() * images.length);
@@ -77,5 +77,27 @@ downloadButton.addEventListener("click", function() {
     });
 });
 
+
+
+
+
+
+
+// test area
+// document.addEventListener('DOMContentLoaded', () => {
+//     const hexagonImages = document.querySelectorAll('.hexagons'); // Select all elements with the 'hexagons' class
+//     const hexagonPositions = {};
+  
+//     hexagonImages.forEach((image) => {
+//       const id = image.id; // Get the id of the image
+//       const top = image.style.top; // Get the top style property
+//       const left = image.style.left; // Get the left style property
+  
+//       // Add the id as a key and store the top and left values as an object
+//       hexagonPositions[id] = { top, left };
+//     });
+//      // Convert the object to a JSON string
+//     console.log(hexagonPositions); // Log the resulting object
+//   });
 
 

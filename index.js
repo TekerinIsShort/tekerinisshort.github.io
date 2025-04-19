@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 const downloadButton = document.getElementById("download_button");
+
 downloadButton.addEventListener("click", function() {
-    console.log("Download button clicked");
     html2canvas(map).then(canvas => {
         canvas.toBlob(function(blob) {
           window.saveAs(blob, 'TekerinISshort.png');
